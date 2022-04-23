@@ -1,0 +1,34 @@
+name: tor-daemon
+base: core20
+version: '0.4.6.10'
+summary: Tor binary running as a daemon
+description: |
+  The Tor binary running as a daemon.
+  Default configuration can be found at /var/snap/tor-daemon/current/usr/local/etc/tor/torrc
+grade: stable
+confinement: strict
+
+apps:
+  tor:
+    command: usr/local/bin/tor
+    daemon: simple
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  tor:
+    source: https://dist.torproject.org/tor-0.4.6.10.tar.gz
+    plugin: autotools
+    build-packages:
+      - libssl-dev
+      - libevent-dev
+      - zlib1g-dev
+    stage-packages:
+      - libevent-2.1-7
+
+layout:
+  /usr/local/etc/tor:
+    bind: $SNAP_DATA/usr/local/etc/tor
+  /var/lib/tor:
+    bind: $SNAP_DATA/var/lib/tor
