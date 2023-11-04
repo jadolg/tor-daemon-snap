@@ -1,6 +1,6 @@
 name: tor-daemon
 base: core20
-version: '0.4.8.7'
+version: '0.4.8.8'
 summary: Tor binary running as a daemon
 description: |
   The Tor binary running as a daemon.
@@ -18,7 +18,7 @@ apps:
 
 parts:
   tor:
-    source: https://dist.torproject.org/tor-0.4.8.7.tar.gz
+    source: https://dist.torproject.org/tor-0.4.8.8.tar.gz
     plugin: autotools
     build-packages:
       - libssl-dev
