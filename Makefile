@@ -56,7 +56,7 @@ fetch-source:
 verify:
 	@VERSION="$$(grep -oE '^version:.*' $(SNAPCRAFT) | grep -oE '[0-9]+(\.[0-9]+)+')"
 	EXPECTED="$$(grep -oE 'EXPECTED_SHA256=[0-9a-f]+' $(SNAPCRAFT) | cut -d= -f2)"
-	KEYS="$$(grep -oE 'KEYS="[0-9A-F ]+"' $(SNAPCRAFT) | sed -E 's/KEYS="([^"]+)"/\1/')"
+	KEYS="$$(sed -nE 's/.*KEYS="([0-9A-F ]+)".*/\1/p' $(SNAPCRAFT))"
 	D="$$(mktemp -d)"; trap 'rm -rf "$$D"' EXIT
 	$(MAKE) --no-print-directory fetch-source \
 	  VERSION="$$VERSION" EXPECTED_SHA256="$$EXPECTED" KEYS="$$KEYS" DEST="$$D"
@@ -88,7 +88,7 @@ bump:
 	  printf '   %s  %s\n' "$$fp" "$$(gpg --list-keys --with-colons "$$fp" | awk -F: '/^uid:/{print $$10; exit}')"
 	done
 
-	PINNED="$$(grep -oE 'KEYS="[0-9A-F ]+"' $(SNAPCRAFT) | sed -E 's/KEYS="([^"]+)"/\1/')"
+	PINNED="$$(sed -nE 's/.*KEYS="([0-9A-F ]+)".*/\1/p' $(SNAPCRAFT))"
 	NEW=""
 	for fp in $$SIGNERS; do
 	  case " $$PINNED " in *" $$fp "*) ;; *) NEW="$$NEW $$fp" ;; esac
