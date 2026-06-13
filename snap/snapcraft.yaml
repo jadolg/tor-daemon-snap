@@ -1,5 +1,5 @@
 name: tor-daemon
-base: core20
+base: core24
 version: '0.4.9.9'
 summary: Tor binary running as a daemon
 description: |
