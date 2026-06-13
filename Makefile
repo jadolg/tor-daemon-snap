@@ -121,4 +121,4 @@ latest:
 
 .PHONY: build
 build:
-	@snapcraft
+	@snapcraft pack
