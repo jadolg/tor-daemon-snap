@@ -1,2 +1,2 @@
 #!/bin/sh -e
-cp $SNAP/usr/local/etc/tor/torrc.sample $SNAP_DATA/usr/local/etc/tor/torrc
+cp -n "$SNAP/usr/local/etc/tor/torrc.sample" "$SNAP_DATA/usr/local/etc/tor/torrc"

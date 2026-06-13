@@ -26,14 +26,29 @@ apps:
 
 parts:
   tor:
-    source: https://dist.torproject.org/tor-0.4.9.9.tar.gz
+    source: .
     plugin: autotools
     build-packages:
       - libssl-dev
       - libevent-dev
       - zlib1g-dev
+      - curl
+      - gnupg
+      - make
     stage-packages:
       - libevent-2.1-7t64
+    override-pull: |
+      set -eu
+      EXPECTED_SHA256=bd75ba7fd68f607c7806fcf70156a300aa926e9ad69a5e56a8e6414f5227e833
+      KEYS="B74417EDDF22AC9F9E90F49142E86A2A11F48D36 514102454D0A87DB0767A1EBBE6A0531C18A9179"
+      VERSION="${CRAFT_PROJECT_VERSION:-${SNAPCRAFT_PROJECT_VERSION:-}}"
+      [ -n "$VERSION" ] || { echo "ERROR: project version not set" >&2; exit 1; }
+
+      make -C "${CRAFT_PROJECT_DIR:-$SNAPCRAFT_PROJECT_DIR}" fetch-source \
+        VERSION="$VERSION" \
+        EXPECTED_SHA256="$EXPECTED_SHA256" \
+        KEYS="$KEYS" \
+        DEST="$CRAFT_PART_SRC"
 
 layout:
   /usr/local/etc/tor:
