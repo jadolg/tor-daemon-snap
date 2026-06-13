@@ -11,6 +11,7 @@ KEYSERVERS := hkps://keys.openpgp.org hkps://keyserver.ubuntu.com
 .PHONY: help
 help:
 	@echo "Targets:"
+	@echo "  make latest                       Print the latest stable Tor version on $(BASE)"
 	@echo "  make verify                       Download the pinned release, verify signature + hash"
 	@echo "  make bump VERSION=x               Verify release x and rewrite version + EXPECTED_SHA256"
 	@echo "  make bump VERSION=x TRUST_NEW=1   Same, but also trust any new signer key"
@@ -110,6 +111,13 @@ bump:
 	  echo ">> Added new signer key(s) to KEYS:$$NEW"
 	fi
 	echo ">> Updated $(SNAPCRAFT): version $(VERSION), sha256 $$HASH"
+
+.PHONY: latest
+latest:
+	@curl -sSfL "$(BASE)/" \
+	  | grep -oE 'tor-[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz' \
+	  | sed -E 's/^tor-(.+)\.tar\.gz$$/\1/' \
+	  | sort -V | tail -1
 
 .PHONY: build
 build:

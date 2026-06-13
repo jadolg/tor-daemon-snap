@@ -35,11 +35,17 @@ make verify     # download the pinned release and verify its signature + hash
 
 ## Updating to a new Tor release
 
+Check the latest stable release upstream:
+
+```sh
+make latest
+```
+
 The version lives once in the top-level `version:` field and the hash once in
 `EXPECTED_SHA256`. Both are updated for you:
 
 ```sh
-make bump VERSION=0.4.9.10
+make bump VERSION=$(make latest)
 ```
 
 This downloads the new release's signed checksum, verifies the signature against the
