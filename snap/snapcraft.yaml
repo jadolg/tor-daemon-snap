@@ -25,7 +25,7 @@ parts:
       - libevent-dev
       - zlib1g-dev
     stage-packages:
-      - libevent-2.1-7
+      - libevent-2.1-7t64
 
 layout:
   /usr/local/etc/tor:
