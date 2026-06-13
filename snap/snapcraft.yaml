@@ -1,10 +1,16 @@
 name: tor-daemon
+title: Tor Daemon
 base: core26
 version: '0.4.9.9'
 summary: Tor binary running as a daemon
 description: |
   The Tor binary running as a daemon.
   Default configuration can be found at /var/snap/tor-daemon/current/usr/local/etc/tor/torrc
+license: BSD-3-Clause
+contact: diazorozcoj@gmail.com
+issues: https://github.com/jadolg/tor-daemon-snap/issues
+source-code: https://github.com/jadolg/tor-daemon-snap
+website: https://www.torproject.org
 grade: stable
 confinement: strict
 
