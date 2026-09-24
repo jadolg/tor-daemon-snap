@@ -1,7 +1,7 @@
 name: tor-daemon
 title: Tor Daemon
 base: core26
-version: '0.4.9.12'
+version: '0.4.9.13'
 summary: Tor binary running as a daemon
 description: |
   The Tor binary running as a daemon.
@@ -45,7 +45,7 @@ parts:
       - libevent-2.1-7t64
     override-pull: |
       set -eu
-      EXPECTED_SHA256=c0d307c9dcdaee4848a8ca53e9d6c4ec92823e4f30be12790b0fbddfc6515f5b
+      EXPECTED_SHA256=5e748d3272cdf44a7d7741173f371c8def3d96eecb77e93c89c50663ce9cc792
       KEYS="B74417EDDF22AC9F9E90F49142E86A2A11F48D36 514102454D0A87DB0767A1EBBE6A0531C18A9179"
       VERSION="${CRAFT_PROJECT_VERSION:-${SNAPCRAFT_PROJECT_VERSION:-}}"
       [ -n "$VERSION" ] || { echo "ERROR: project version not set" >&2; exit 1; }
